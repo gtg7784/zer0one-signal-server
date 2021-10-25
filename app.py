@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 from serial import Serial
+import argparse
 
 ser = Serial('/dev/ttyACM0', 9600)
 app = Flask(__name__)
@@ -15,4 +16,7 @@ def detected():
     return jsonify({'message': 'Detected!'})
 
 if __name__=="__main__":
-  app.run(host="0.0.0.0", port="80", debug=True)
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--host', type=str, default='127.0.0.1', help='host')
+    args = parser.parse_args()
+    app.run(host=args.host, port="80", debug=True)
