@@ -14,7 +14,7 @@ app = Flask(__name__)
 def index():
     return jsonify({'message': 'Hello World!'})
 
-@app.route('/detected', method=['POST'])
+@app.route('/detected', methods=['POST'])
 def detected():
     index = request.json['index']
     ser.write(f'{index}'.encode('utf-8'))
